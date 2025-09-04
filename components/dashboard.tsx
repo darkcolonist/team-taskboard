@@ -10,6 +10,7 @@ import { LogOut, Plus, Users, Clock } from "lucide-react"
 import AddTaskForm from "@/components/add-task-form"
 import DraggableTaskColumn from "@/components/draggable-task-column"
 import { Badge } from "@/components/ui/badge"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function Dashboard() {
   const { user, logout } = useAuth()
@@ -113,6 +114,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <ThemeToggle />
               <Button
                 onClick={() => setShowAddTask(true)}
                 size="sm"
