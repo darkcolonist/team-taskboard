@@ -31,49 +31,35 @@ export default function DraggableTaskCard({ task, index, isTopPriority, canDrag 
       style={style}
       className={`
         ${isDragging ? "opacity-50 rotate-2 scale-105" : ""}
-        ${isTopPriority ? "ring-2 ring-accent shadow-md bg-accent/5" : ""}
-        ${canDrag ? "cursor-move hover:shadow-md" : ""}
-        transition-all duration-200 group
+        ${isTopPriority 
+          ? "border-accent bg-gradient-to-br from-accent/10 to-accent/5 shadow-lg ring-1 ring-accent/20 animate-pulse-glow" 
+          : "border-border/50 bg-card/50 hover:bg-card/80"
+        }
+        ${canDrag ? "hover:shadow-lg hover:scale-[1.02]" : "hover:shadow-md"}
+        transition-all duration-300 group relative overflow-hidden
       `}
       {...attributes}
-      {...listeners}
     >
-      <CardContent className="p-3">
-        <div className="flex items-start gap-2">
+      {/* Subtle gradient overlay for top priority tasks */}
+      {isTopPriority && (
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent pointer-events-none" />
+      )}
+      
+      <CardContent className="px-2 py-0.5 relative">
+        <div className="flex items-center gap-2">
           {canDrag && (
-            <GripVertical className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <GripVertical 
+              className="h-3 w-3 text-muted-foreground flex-shrink-0 opacity-0 group-hover:opacity-60 transition-opacity duration-200 cursor-move" 
+              {...listeners}
+            />
           )}
           <div className="flex-1 min-w-0">
-            <div className="flex items-start justify-between gap-2 mb-2">
-              <h4 className="font-medium text-sm leading-tight text-balance text-foreground">{task.title}</h4>
-              {isTopPriority && (
-                <div className="flex items-center gap-1 flex-shrink-0">
-                  <Star className="h-3 w-3 text-accent fill-accent" />
-                  <Badge variant="default" className="text-xs bg-accent hover:bg-accent">
-                    Priority #1
-                  </Badge>
-                </div>
-              )}
-            </div>
-            <div className="flex items-center justify-between">
-              <Badge
-                variant={task.status === "in-progress" ? "default" : "secondary"}
-                className={`text-xs ${task.status === "in-progress" ? "bg-accent hover:bg-accent" : ""}`}
-              >
-                {task.status === "in-progress" ? (
-                  <>
-                    <Clock className="h-3 w-3 mr-1" />
-                    In Progress
-                  </>
-                ) : (
-                  <>
-                    <Pause className="h-3 w-3 mr-1" />
-                    Paused
-                  </>
-                )}
-              </Badge>
-              {index > 0 && <span className="text-xs text-muted-foreground">#{index + 1}</span>}
-            </div>
+            <h4 
+              className="font-semibold text-sm leading-tight text-foreground group-hover:text-accent transition-colors duration-200 truncate whitespace-nowrap overflow-hidden"
+              title={task.title}
+            >
+              {task.title}
+            </h4>
           </div>
         </div>
       </CardContent>
