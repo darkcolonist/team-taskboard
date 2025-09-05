@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/hooks/use-theme"
-import { Suspense } from "react"
 import "./globals.css"
 
 const inter = Inter({
@@ -32,11 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans ${inter.variable}`}>
-        <Suspense fallback={null}>
-          <ThemeProvider defaultTheme="system" storageKey="team-dashboard-theme">
-            {children}
-          </ThemeProvider>
-        </Suspense>
+        <ThemeProvider defaultTheme="light" storageKey="team-dashboard-theme">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

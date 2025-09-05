@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   --background: oklch(1 0 0); /* #ffffff */
   --foreground: oklch(0.205 0.014 285.82); /* #1f2937 */
@@ -123,6 +121,26 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Debug: Make sure dark mode is working */
+  .dark {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+  }
+  
+  .light {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  /* Make sure the html element gets the theme class */
+  html.dark {
+    background-color: #1a1a1a !important;
+  }
+  
+  html.light {
+    background-color: #ffffff !important;
   }
 }
 
