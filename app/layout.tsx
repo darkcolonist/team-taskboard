@@ -1,11 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-import { Analytics } from "@vercel/analytics/next"
+import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/hooks/use-theme"
 import { Suspense } from "react"
 import "./globals.css"
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+})
 
 export const metadata: Metadata = {
   title: "Team Task Dashboard",
@@ -20,13 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className={`font-sans ${inter.variable}`}>
         <Suspense fallback={null}>
           <ThemeProvider defaultTheme="system" storageKey="team-dashboard-theme">
             {children}
           </ThemeProvider>
         </Suspense>
-        <Analytics />
       </body>
     </html>
   )

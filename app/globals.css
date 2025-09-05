@@ -37,6 +37,7 @@
   --sidebar-accent-foreground: oklch(1 0 0); /* #ffffff */
   --sidebar-border: oklch(0.922 0.004 247.86); /* #e5e7eb */
   --sidebar-ring: oklch(0.627 0.265 303.9 / 0.5); /* rgba(139, 92, 246, 0.5) */
+  --font-inter: "Inter", sans-serif;
 }
 
 .dark {
@@ -75,8 +76,9 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Updated font variables to use Inter instead of Geist */
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
